@@ -1,0 +1,14 @@
+<form action="/find_a_seat/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+{% if submitted and not found %}
+    <p>I'm sorry, we couldn't find that room or person!</p>
+{% elif submitted and found %}
+    <p>We have a match on {{ floor_name }}! Here is the map:</p>
+    <img src="data:image/png;base64,{{image}}" />
+{% elif var3 %}
+    {{ var3 }}
+{% endif %}
