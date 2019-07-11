@@ -1,34 +1,47 @@
-<form id='main-form' action="/find_a_seat/" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
+{% load static %}
+<html>
+    <head>
+        <title>edX Seatfinder</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/seatfinder.css' %}">
+    </head>
 
+    <body>
+        <div class="page-header">
+            <h1>edX Seatfinder</h1>
+        </div>
+        <form id='main-form' action="/find_a_seat/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Find">
+        </form>
 
-{% if submitted and not found %}
-    <p>I'm sorry, we couldn't find that room or person!</p>
+        {% if submitted and not found %}
+            <h5>I'm sorry, we couldn't find that room or person!</h5>
 
-{% elif submitted and found and not multiple_matches %}
-    <p>We have a match on {{ floor_name }}! Here is the map:</p>
-    <img src="data:image/png;base64,{{image}}" />
+        {% elif submitted and found and not multiple_matches %}
+            <h5>We have a match on {{ floor_name }}! Here is the map:</h5>
+            <img src="data:image/png;base64,{{image}}" />
 
-{% elif submitted and found and multiple_matches %}
-  <p>Looks like we found a few matches! Please select the one you're looking for:</p>
-  <ul>
-    {% for fp, names in matched_floor_plans.items %}
-        {% for name in names %}
-            <li>
-                <form method="post" action="/find_a_seat/">
-                    {{ class }}
-                    {% csrf_token %}
-                    {{ name }} on {{ fp.floor_name }}
-                    <input id="your_name" type="text" name="name" value="{{ name }}" hidden=True>
-                    <input type="submit" value="Submit">
-                </form>
-
-            </li>
-        {% endfor %}
-    {% endfor %}
-  
-  </ul>
-{% endif %}
+        {% elif submitted and found and multiple_matches %}
+          <h5>Looks like we found a few matches! Please select the one you're looking for:</h5>
+          <table class='table-bordered'>
+            {% for fp, names in matched_floor_plans.items %}
+                {% for name in names %}
+                    <tr>
+                        <td class='well'>{{ name }} on {{ fp.floor_name }}</td>
+                        <td class='well'>
+                            <form method="post" action="/find_a_seat/">
+                                {% csrf_token %}
+                                <input id="your_name" type="text" name="name" value="{{ name }}" hidden=True>
+                                <input type="submit" value="Find">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+          </table>
+        {% endif %}
+    </body>
+</html>

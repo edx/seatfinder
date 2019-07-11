@@ -116,7 +116,7 @@ def find_seat(request):
                 'xml': updated_xml,
                 'image': image,
                 'multiple_matches': False,
-                'floor_name': floor_plan_with_name.floor_name,
+                'floor_name': fp.floor_name,
             }
             return render(request, 'name.html', data)
 
