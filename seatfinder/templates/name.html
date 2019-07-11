@@ -1,14 +1,34 @@
-<form action="/find_a_seat/" method="post">
+<form id='main-form' action="/find_a_seat/" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit">
 </form>
 
+
 {% if submitted and not found %}
     <p>I'm sorry, we couldn't find that room or person!</p>
-{% elif submitted and found %}
+
+{% elif submitted and found and not multiple_matches %}
     <p>We have a match on {{ floor_name }}! Here is the map:</p>
     <img src="data:image/png;base64,{{image}}" />
-{% elif var3 %}
-    {{ var3 }}
+
+{% elif submitted and found and multiple_matches %}
+  <p>Looks like we found a few matches! Please select the one you're looking for:</p>
+  <ul>
+    {% for fp, names in matched_floor_plans.items %}
+        {% for name in names %}
+            <li>
+                <form method="post" action="/find_a_seat/">
+                    {{ class }}
+                    {% csrf_token %}
+                    {{ name }} on {{ fp.floor_name }}
+                    <input id="your_name" type="text" name="name" value="{{ name }}" hidden=True>
+                    <input type="submit" value="Submit">
+                </form>
+
+            </li>
+        {% endfor %}
+    {% endfor %}
+  
+  </ul>
 {% endif %}

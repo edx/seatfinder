@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from seatfinder import views
 
 urlpatterns = [
-    path('find_a_seat/', views.find_seat),
+    re_path(r'^find_a_seat/.*', views.find_seat, name='find_a_seat'),
     path('admin/', admin.site.urls),
 ]

@@ -121,4 +121,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 FLOOR_PLANS_DIRECTORY = BASE_DIR + '/floor_plans/'
-XML_TO_IMG_SCRIPT_LOCATION = '~/drawio-batch/drawio-batch.js'
+XML_TO_IMG_SCRIPT_LOCATION = '/Users/cpappas/Desktop/repos/hackathon/drawio-batch/drawio-batch.js'
