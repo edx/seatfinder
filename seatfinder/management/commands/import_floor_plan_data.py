@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for filename in os.listdir(settings.FLOOR_PLANS_DIRECTORY):
-            if not file.endswith(".xml"):
+            if not filename.endswith(".xml"):
                 continue
             full_filepath = os.path.join(settings.FLOOR_PLANS_DIRECTORY, filename)
             with open(full_filepath, 'r') as fh:
