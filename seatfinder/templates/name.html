@@ -1,7 +1,7 @@
 {% load static %}
 <html>
     <head>
-        <title>edX Seatfinder</title>
+        <title>Welcome to Seatfinder</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/seatfinder.css' %}">
@@ -9,7 +9,7 @@
 
     <body>
         <div class="page-header">
-            <h1>edX Seatfinder</h1>
+            <h1>Welcome to Seatfinder</h1>
         </div>
         <form id='main-form' action="/find_a_seat/" method="post">
             {% csrf_token %}
