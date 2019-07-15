@@ -1,3 +1,7 @@
+# seatfinder
+
+An application for serving searchable floor plan data to assist in finding seats/rooms.
+
 # Getting started (Mac)
 
 ## Create a checkout of seatfinder and set up basics
@@ -70,5 +74,3 @@ In your browser, navigate to `http://127.0.0.1:8000/find_a_seat/`
 In the textbox, search for `superman`.
 
 You should see an imagine returned with superman's desk highlighted red.
-
-
